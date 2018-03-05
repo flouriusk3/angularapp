@@ -11,6 +11,9 @@ export class UsersComponent implements OnInit {
   users: User[];
   showExtended: boolean = true;
   loaded: boolean = false;
+  enableAdd: boolean = true;
+  currentClasses = {};
+  currentStyles = {};
 
   constructor() { }
 
@@ -20,12 +23,14 @@ export class UsersComponent implements OnInit {
       {
         firstName: 'John',
         lastName: 'Doe',
-        age: 30,
+        age: 70,
         address: {
           street: 'One Main St.',
           city: 'Houston',
           state: 'TX'
-        }
+        },
+        image:'http://lorempixel.com/600/600/people/3',
+        isActive: true
       },
       // User 2
       {
@@ -36,7 +41,9 @@ export class UsersComponent implements OnInit {
           street: '20 N. Main St.',
           city: 'Houston',
           state: 'TX'
-        }
+        },
+        image:'http://lorempixel.com/600/600/people/2',
+        isActive: false
       },
       // User 3
       {
@@ -47,14 +54,18 @@ export class UsersComponent implements OnInit {
           street: '55 Mill St.',
           city: 'Houston',
           state: 'TX'
-        }
+        },
+        image:'http://lorempixel.com/600/600/people/1',
+        isActive: true
       }
 
     ];
 
     this.loaded = true;
+    this.setCurrentClasses();
+    this.setCurrentStyles();
 
-    this.addUser({
+    /*this.addUser({
       firstName: 'David',
       lastName: 'Jackson',
       age: 23,
@@ -63,11 +74,27 @@ export class UsersComponent implements OnInit {
         city: 'Houston',
         state: 'TX'
       }
-    });
+    });*/
+
+ 
   }
 
   addUser(user: User){
     this.users.push(user);
+  }
+
+  setCurrentClasses(){
+    this.currentClasses = {
+      'btn-success': this.enableAdd,
+      'big-text': this.showExtended
+    }
+  }
+
+  setCurrentStyles(){
+    this.currentStyles = {
+      'padding-top': this.showExtended ? '0' : '40px',
+      'font-size': this.showExtended ? '' : '40px'
+    }
   }
 
 }
