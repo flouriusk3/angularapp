@@ -18,13 +18,19 @@ export class UsersComponent implements OnInit {
   loaded: boolean = false;
   enableAdd: boolean = false;
   showUserForm: boolean = false;
-  @ViewChild('userForm')form: any
+  @ViewChild('userForm')form: any;
+  data: any;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.users = this.dataService.getUsers();
-    this.loaded = true;
+    this.dataService.getData().subscribe(data => {
+      console.log(data);
+    });
+    this.dataService.getUsers().subscribe(users => {
+      this.users = users;
+      this.loaded = true;
+    });
   }
 
   toggleHide(user: User) {
